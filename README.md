@@ -36,11 +36,11 @@ Commands and Explanations
 **out**: Deactivate the virtual environment. Use the command `deactivate` (for Unix-based systems).
 
 
- to run command = >.
-  windows :.
-  py <command>  .
- linux : .
-  ./my_script.sh <command> .
-  or .
-   make -f py <command>.
+ to run command = >
+  windows :
+  py <command>  
+ linux : 
+  ./my_script.sh <command> 
+  or 
+   make -f py <command>
 
