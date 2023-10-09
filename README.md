@@ -8,6 +8,7 @@ designed to simplify the management of Python virtual environments and related t
 
 
 Use the following git command to clone the repository:
+
 		git clone https://github.com/aboglion/py.git
 
 
@@ -44,10 +45,13 @@ Commands and Explanations
 
 
  to run command = >
+ 
 	  windows :
 	  	py <command>  
+    
 	 linux : 
 	 	./my_script.sh <command> 
+   
 	make file (linux) 
 		make -f py <command>
 
