@@ -21,26 +21,23 @@ it will show the help :
 Commands and Explanations
 -------------------------
 		
-		**init**: Initialize the virtual environment and install dependencies.
-		
-		**active**: Manually activate the virtual environment. Use the command `source venv/bin/activate`.
-		
-		**install**: Install dependencies from the `requirements.txt` file.
-		
-		**req**: Generate a list of installed dependencies into the `requirements.txt` file.
-		
-		**run-xxx**: Run a Python script (replace `xxx` with the name of your Python script without the `.py` extension).
-		
-		**clean**: Clean the virtual environment by removing the `venv` directory.
-		
-		**out**: Deactivate the virtual environment. Use the command `deactivate` (for Unix-based systems).
+		command            explanation
+		---------      ---------------------------
+		 init    --> Initialize the virtual environment and install dependencies.
+		 active  --> Instructions for manually activating the virtual environment.
+		 install --> Install dependencies from requirements.txt.
+		 req     --> Generate a list of dependencies into requirements.txt.
+		 run-xxx --> Run the code (replace xxx with the name of your Python script without .py).
+		 clean   --> Clean the virtual environment.
+		 out     --> Deactivate the virtual environment.
+		 ---------      ---------------------------
 
 
  to run command = >
 	  windows :
 	  	py <command>  
 	 linux : 
-	 	 ./my_script.sh <command> 
-	 	 or 
-	   		make -f py <command>
+	 	./my_script.sh <command> 
+	make file (linux) 
+		make -f py <command>
 
