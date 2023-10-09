@@ -25,7 +25,7 @@ place the script in the same directory as your Python script that you intend to 
 		make file = make -f py
 
 # windows : 
-		in cmd run py
+		 py
 
 it will show the help :
 
