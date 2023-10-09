@@ -1,9 +1,18 @@
 # py
-Python Virtual Environment Management Script
+# Python Virtual Environment Management Script
 
 
 designed to simplify the management of Python virtual environments and related tasks. The script allows users to perform various actions such as creating and initializing a virtual environment, installing dependencies, generating a list of dependencies, running Python scripts within the environment, cleaning the environment, and deactivating it. It also provides helpful instructions and usage information.
 
+
+
+
+Use the following git command to clone the repository:
+	git clone https://github.com/aboglion/py.git
+
+ # place the script in the same directory as your Python script that you intend to run.
+
+ 
 
 
 # linux :
