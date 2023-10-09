@@ -8,9 +8,10 @@ designed to simplify the management of Python virtual environments and related t
 
 
 Use the following git command to clone the repository:
-	git clone https://github.com/aboglion/py.git
+		git clone https://github.com/aboglion/py.git
 
- # place the script in the same directory as your Python script that you intend to run.
+
+place the script in the same directory as your Python script that you intend to run.
 
  
 
