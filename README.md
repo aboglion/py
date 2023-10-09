@@ -48,10 +48,11 @@ Commands and Explanations
  
 	  windows :
 	  	py <command>  
-    
+    		-------------------------
 	 linux : 
 	 	./my_script.sh <command> 
-   
-	make file (linux) 
-		make -f py <command>
+       		-------------------------
+		OR make file (linux) :  
+			make -f py <command>
+    		-------------------------
 
