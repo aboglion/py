@@ -18,14 +18,16 @@ place the script in the same directory as your Python script that you intend to 
 
 
 # linux :
-		shell => py.sh
+		the file is py.sh :
 				make the script executable using chmod +x my_script.sh.
 				You can then run it with ./my_script.sh 
 
-		make file = make -f py
+		 or  you can run make file the command:
+   				make -f py
 
 # windows : 
-		 py
+		the file py.bat "run it in cmd":
+				 py
 
 it will show the help :
 
