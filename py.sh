@@ -1,95 +1,95 @@
 #!/bin/bash
 
-PYTHON="venv/bin/python3"
-pip="venv/bin/pip3"
-VENV_ACTIVATE="venv/bin/activate"
+# This script is the Linux equivalent of a Windows bat file.
 
-help() {
-  clear
-  echo "Available targets:"
-  echo "  "
-  echo "command            explanation"
-  echo "---------      ---------------------------"
-  echo "init    --> Initialize the virtual environment and install dependencies."
-  echo "active  --> Instructions for manually activating the virtual environment."
-  echo "install --> Install dependencies from requirements.txt."
-  echo "req     --> Generate a list of dependencies into requirements.txt."
-  echo "run-xxx --> Run the code (replace xxx with the name of your Python script without .py)."
-  echo "clean   --> Clean the virtual environment."
-  echo "exit    --> Deactivate the virtual environment."
-  echo "---------      ---------------------------"
-  echo ""
-  echo "Usage: ./my_script.sh <command>"
-  echo "* in Linux/Unix, enter this command :"
-  echo "      alias py='./py.sh'"
-  echo "      then Usage will be: my_script <command>"
-  echo ""
-}
-
-init() {
-  if [ ! -d "venv" ]; then
-    python3 -m venv venv
-  fi
-  $PYTHON -m pip install --upgrade pip
-  $PYTHON -m pip install -r requirements.txt
-  clear
-  source $VENV_ACTIVATE
-}
-
-active() {
-  if [ -d "venv" ]; then
-    source $VENV_ACTIVATE
-    echo "Virtual environment activated. You can now use the environment for Python development."
-  else
-    echo "Virtual environment not found. Please run 'init' to create and activate the environment."
-  fi
-}
-
-
-install() {
-  if [ -e "requirements.txt" ]; then
-    $PYTHON -m pip install -r requirements.txt
-  else
-    echo "File does not exist."
-  fi
-}
-
-req() {
-  $PYTHON -m pip freeze > requirements.txt
-}
-
-run() {
-  if [ -z "$(echo $1 | grep '^run-')" ]; then
-    echo "Please specify a Python script to run using './my_script.sh run my_script'"
-    exit 1
-  fi
-  clear
-  $PYTHON "$(echo $1 | sed 's/^run-//').py"
-}
-
-clean() {
-  rm -rf venv
-}
-
-out() {
-  $PYTHON -m pip freeze > requirements.txt
-  clear
-  deactivate
-}
-
-# Check for the number of arguments
-if [ $# -eq 0 ]; then
-  help
+# Based on the value of $1, jump to the appropriate section
+if [[ "$1" == "init" ]]; then goto init
+elif [[ "$1" == "init_" ]]; then goto init_
+elif [[ "$1" == "active" ]]; then goto active
+elif [[ "$1" == "install" ]]; then goto install
+elif [[ "$1" == "req" ]]; then goto req
+elif [[ "$1" == "run" ]]; then goto run
+elif [[ "$1" == "clean" ]]; then goto clean
+elif [[ "$1" == "out" ]]; then goto out
 else
-  case $1 in
-    "help") help ;;
-    "init") init ;;
-    "active") active ;;
-    "install") install ;;
-    "req") req ;;
-    "run") run "${@:2}" ;;
-    "clean") clean ;;
-    "out") out ;;
-    *) echo "Invalid command. Use './my_script.sh help' for usage information." ;;
-  esac
+  goto help
 fi
+
+:help
+    clear
+    echo Available targets:
+    echo.
+    echo command            explanation
+    echo ---------      ---------------------------
+    echo. init    --^> Initialize the virtual environment and install dependencies.
+    echo. active  --^> Instructions for manually activating the virtual environment.
+    echo. install --^> Install dependencies from requirements.txt.
+    echo. req     --^> Generate a list of dependencies into requirements.txt.
+    echo. run-xxx --^> Run the code (replace xxx with the name of your Python script without .py).
+    echo. clean   --^> Clean the virtual environment.
+    echo. out     --^> Deactivate the virtual environment.
+    echo. ---------      ---------------------------
+    echo ""
+    echo "Usage: ./my_script.sh <command>"
+    echo "* in Linux/Unix, enter this command :"
+    echo "      alias py='./py.sh'"
+    echo "      then Usage will be: my_script <command>"
+    echo ""
+
+:init_
+    if [[ ! -d venv ]]; then
+        python3 -m venv --no-site-packages venv
+    fi
+    if [[ -f requirements.txt ]]; then
+        /usr/bin/python3 -m pip install -r requirements.txt
+    fi
+    clear
+
+:init
+    if [[ ! -d venv ]]; then
+        python3 -m venv venv
+    fi
+    if [[ -f requirements.txt ]]; then
+        /usr/bin/python3 -m pip install -r requirements.txt
+    fi
+    clear
+
+:active
+    source .venv/bin/activate
+
+:install
+    if [[ -f requirements.txt ]]; then
+        /usr/bin/python3 -m pip install -r requirements.txt
+    else
+        echo File does not exist.
+    fi
+
+:req
+    /usr/bin/python3 -m pip freeze > requirements.txt
+
+:run
+    if [[ -z "$2" ]]; then
+        echo Please specify a Python script to run using 'script.sh run my_script'
+        exit 1
+    fi
+    clear
+    /usr/bin/python3 "$2".py
+
+:clean
+    deactivate
+    if [[ -d venv ]]; then
+        rm -rf .venv
+    fi
+
+:out
+    /usr/bin/python3 -m pip freeze > requirements.txt
+    if [[ -f requirements.txt ]]; then
+        for file in requirements.txt; do
+            if [[ -s "$file" ]]; then
+                rm requirements.txt
+            fi
+        done
+    fi
+
+    deactivate
+
